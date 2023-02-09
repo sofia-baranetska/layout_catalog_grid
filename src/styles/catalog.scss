@@ -1,5 +1,11 @@
 $width: 200px;
 
+$media : (
+  1024px: 4,
+  768px: 3,
+  488px: 2,
+);
+
 .catalog {
   display: grid;
   justify-content: center;
@@ -9,16 +15,11 @@ $width: 200px;
   max-width: 944px;
   margin: 0 auto;
 
-  @media (max-width: 1023px) {
-    grid-template-columns: repeat(3, $width);
-  }
 
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, $width);
-  }
-
-  @media (max-width: 487px) {
-    grid-template-columns: $width;
+  @each $max_Width, $columns in $media {
+    @media (max-width: $max_Width) {
+      grid-template-columns: repeat($columns, $width);
+    }
   }
 
   &__card {
